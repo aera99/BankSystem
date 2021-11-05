@@ -1,0 +1,22 @@
+﻿<Window x:Class="BankSystem.View.LoanRepayment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankSystem.View"
+        mc:Ignorable="d"
+        Title="LoanRepayment" Height="145.785" Width="274.132" Icon="Resources/bank_icon.jpg">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Resources/back2.jpg"/>
+        </Grid.Background>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" Height="32">
+            <Run Text="Сумма кредита:"/>
+            <Run Text="{Binding Loan}"/>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="125,10,0,0" TextWrapping="Wrap" Text="Введите сумму погашения кредита:" VerticalAlignment="Top" Width="131"/>
+        <TextBox x:Name="TextSum" HorizontalAlignment="Left" Height="23" Margin="125,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="131"/>
+        <Button Content="Отмена" HorizontalAlignment="Left" Margin="196,85,0,0" VerticalAlignment="Top" Width="60" IsCancel="True"/>
+        <Button Content="Принять" HorizontalAlignment="Left" Margin="125,85,0,0" VerticalAlignment="Top" Width="60" Click="Button_Click"/>
+    </Grid>
+</Window>

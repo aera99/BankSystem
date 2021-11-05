@@ -1,0 +1,6 @@
+C:\Users\User\OneDrive\Рабочий стол\дз\modul13\LibraryModelBank\obj\Debug\LibraryModelBank.csprojAssemblyReference.cache
+C:\Users\User\OneDrive\Рабочий стол\дз\modul13\LibraryModelBank\obj\Debug\LibraryModelBank.csproj.CoreCompileInputs.cache
+C:\Users\User\OneDrive\Рабочий стол\дз\modul13\LibraryModelBank\bin\Debug\LibraryModelBank.dll
+C:\Users\User\OneDrive\Рабочий стол\дз\modul13\LibraryModelBank\bin\Debug\LibraryModelBank.pdb
+C:\Users\User\OneDrive\Рабочий стол\дз\modul13\LibraryModelBank\obj\Debug\LibraryModelBank.dll
+C:\Users\User\OneDrive\Рабочий стол\дз\modul13\LibraryModelBank\obj\Debug\LibraryModelBank.pdb

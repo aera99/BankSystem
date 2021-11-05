@@ -1,0 +1,47 @@
+﻿<Window x:Class="BankSystem.View.MoneyTransfer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankSystem.View"
+        mc:Ignorable="d"
+        Title="MoneyTransfer" Height="380" Width="720" Icon="Resources/bank_icon.jpg">
+    <Grid Margin="0,0,-3,0">
+        <Grid.Background>
+            <ImageBrush ImageSource="Resources/back2.jpg"/>
+        </Grid.Background>
+        <Button Content="Отмена" HorizontalAlignment="Left" Margin="630,319,0,0" VerticalAlignment="Top" Width="75" IsCancel="True"/>
+        <Button Content="Принять" HorizontalAlignment="Left" Margin="549,319,0,0" VerticalAlignment="Top" Width="76" Click="Button_Click"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="549,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" Text="{Binding Sum , Mode=TwoWay}"/>
+        <Grid Height="255" Margin="0,10,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Клиент который переводит деньги:" VerticalAlignment="Top" Height="24" Width="315" TextAlignment="Center"/>
+            <TextBlock HorizontalAlignment="Left" Margin="390,10,0,0" TextWrapping="Wrap" Text="Клиент которому поступают деньги:" VerticalAlignment="Top" Height="24" Width="315" TextAlignment="Center"/>
+            <TextBlock HorizontalAlignment="Left" Margin="343,134,0,0" TextWrapping="Wrap" Text="🠖" VerticalAlignment="Top" Width="30" Height="36" TextAlignment="Center" FontSize="36"/>
+            <DataGrid HorizontalAlignment="Left" Height="206" Margin="10,39,0,0" VerticalAlignment="Top" Width="315" SelectedValue="{Binding SelectedSender , Mode=TwoWay}"
+                      ItemsSource="{Binding Users}" Background="{x:Null}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
+                    <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"/>
+                    <DataGridTextColumn Header="Возраст" Binding="{Binding Age}"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="Счет" Binding="{Binding PersonalMoney}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid HorizontalAlignment="Left" Height="206" Margin="390,39,0,0" VerticalAlignment="Top" Width="315" SelectedValue="{Binding SelectedRecipient , Mode=TwoWay}"
+                      ItemsSource="{Binding Users}" Background="{x:Null}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
+                    <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"/>
+                    <DataGridTextColumn Header="Возраст" Binding="{Binding Age}"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="Счет" Binding="{Binding PersonalMoney}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="549,270,0,0" TextWrapping="Wrap" Text="Введите сумму:" VerticalAlignment="Top" Width="156"/>
+
+    </Grid>
+</Window>

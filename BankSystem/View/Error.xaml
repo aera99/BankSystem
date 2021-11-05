@@ -1,0 +1,13 @@
+﻿<Window x:Class="BankSystem.View.Error"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankSystem.View"
+        mc:Ignorable="d"
+        Title="Error" Height="116.597" Width="227.016" ResizeMode="NoResize" Icon="Resources/ErrorPct.jpg">
+    <Grid>
+        <TextBlock Margin="51,4,52,0" TextWrapping="Wrap" Text="Вы ошиблись в вводе." VerticalAlignment="Top" Height="42" TextAlignment="Center" FontSize="16"/>
+        <Button Content="ОК" HorizontalAlignment="Center" Margin="84,51,85,0" VerticalAlignment="Top" Width="52" IsCancel="True" Background="#FFE2DCDC"/>
+    </Grid>
+</Window>
