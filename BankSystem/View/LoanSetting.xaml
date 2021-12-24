@@ -12,16 +12,25 @@
         </Grid.Background>
         <Grid HorizontalAlignment="Left" Height="173" Margin="10,10,0,0" VerticalAlignment="Top" Width="157">
             <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Данные о выбранном клиенте:" VerticalAlignment="Top" Width="137" Height="33"/>
-            <TextBlock x:Name="FIO" HorizontalAlignment="Left" Margin="10,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" Text="ФИО - " Height="30"/>
-            <TextBlock x:Name="Balance" HorizontalAlignment="Left" Margin="10,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" Text="Баланс - " Height="30"/>
-            <TextBlock x:Name="Procent" HorizontalAlignment="Left" Margin="10,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" Text="Кредитный процент - " Height="29"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,49,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" Height="30">
+                <Run Text="ФИО - "/>
+                <Run Text="{Binding FullName}"/>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="10,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" Height="30">
+                <Run Text="Баланс - "/>
+                <Run Text="{Binding PersonalMoney}"/>
+            </TextBlock>
+            <TextBlock HorizontalAlignment="Left" Margin="10,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="137" Height="37">
+                <Run Text="Кредитный процент - "/>
+                <Run Text="{Binding PercentageOfLoan}"/>
+            </TextBlock>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="113" Margin="172,10,0,0" VerticalAlignment="Top" Width="188">
             <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Введите сумму выдаваемого кредита:" VerticalAlignment="Top" Width="168"/>
-            <TextBox x:Name="TextSum" HorizontalAlignment="Left" Height="21" Margin="10,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168"/>
+            <TextBox HorizontalAlignment="Left" Height="21" Margin="10,47,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="168" Text="{Binding AddLoan}"/>
         </Grid>
         <Button Content="Отмена" HorizontalAlignment="Left" Margin="291,163,0,0" VerticalAlignment="Top" Width="75" IsCancel="True"/>
-        <Button Content="Принять" HorizontalAlignment="Left" Margin="211,163,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Принять" HorizontalAlignment="Left" Margin="211,163,0,0" VerticalAlignment="Top" Width="75" Command="{Binding Path=Accept}"/>
 
     </Grid>
 </Window>

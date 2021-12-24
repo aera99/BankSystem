@@ -13,93 +13,109 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace BankSystem.View
 {
     /// <summary>
     /// Логика взаимодействия для UserSetting.xaml
     /// </summary>
-    public partial class UserSetting : Window
+    public partial class UserSetting : Window , INotifyPropertyChanged
     {
-        public User user { get; set; }
+        public User User { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Age { get; set; }
+        public string PersonalMoney { get; set; }
+        public string DepositMoney { get; set; }
+
+        private bool contribution;
+        public bool Contribution
+        {
+            get { return contribution; }
+            set
+            {
+                contribution = value;
+                OnPropertyChanged("Contribution");
+            }
+        }
+        public bool Capitalization { get; set; }
+        
         public UserSetting()
         {
             InitializeComponent();
             this.Focus();
-            user = new User();
+            this.DataContext = this;
         }
         public UserSetting(User user)
         {
             InitializeComponent();
             this.Focus();
-            this.user = user;
+            this.DataContext = this;
+            User = user;
 
-            TextName.Text = this.user.FirstName;
-            TextLName.Text = this.user.LastName;
-            TextAge.Text = Convert.ToString(this.user.Age);
-            TextMoney.Text = Convert.ToString(this.user.PersonalMoney);
-            CheckContribution.IsChecked = user.Contribution;
-            if (CheckContribution.IsChecked == true)
-            {
-                OnCapitalization.IsEnabled = true;
-                OffCapitalization.IsEnabled = true;
-                OnCapitalization.IsChecked = user.Capitalization;
-                if (OnCapitalization.IsChecked == false)
-                {
-                    OffCapitalization.IsChecked = true;
-                }
-            }
+            FirstName = user.FirstName;
+            LastName = user.LastName;
+            Age = Convert.ToString(user.Age);
+            PersonalMoney = Convert.ToString(user.PersonalMoney);
+            DepositMoney = Convert.ToString(user.DepositMoney);
+            Contribution = user.Contribution;
+            Capitalization = user.Capitalization;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        #region команды
+        private RelayCommand accept;
+        public RelayCommand Accept
         {
-            if ((TextName.Text != null) || (TextLName.Text != null) || (TextAge.Text != null) || (TextMoney.Text != null))
+            get
             {
-                try
-                {
-                    user.Age = Convert.ToInt32(TextAge.Text);
-                    user.PersonalMoney = Convert.ToDouble(TextMoney.Text);
-                    user.FirstName = TextName.Text;
-                    user.LastName = TextLName.Text;
- 
-                    if (CheckContribution.IsChecked == true)
+                return accept ??
+                    (accept = new RelayCommand(obj =>
                     {
-                        user.Contribution = true;
-                        if (OnCapitalization.IsChecked == true)
+                        try
                         {
-                            user.Capitalization = true;
+                            if (CheckNull() || User == null)
+                            {
+                                User = new User(FirstName, LastName, Convert.ToInt32(Age), Convert.ToDouble(PersonalMoney), Convert.ToDouble(DepositMoney), Contribution, Capitalization);
+                            }
+                            else if (CheckNull() || User != null)
+                            {
+                                User.FirstName = FirstName;
+                                User.LastName = LastName;
+                                User.Age = Convert.ToInt32(Age);
+                                User.PersonalMoney = Convert.ToDouble(PersonalMoney);
+                                User.DepositMoney = Convert.ToDouble(DepositMoney);
+                                User.Contribution = Contribution;
+                                User.Capitalization = Capitalization;
+                            }
+                            DialogResult = true;
                         }
-                        user.DepositMoney = Convert.ToDouble(TextContribution.Text);
-                    }
-
-                    DialogResult = true;
-                }
-                catch (FormatException)
-                {
-                    Error error = new Error();
-                    error.ShowDialog();
-                }
+                        catch (FormatException)
+                        {
+                            Error error = new Error();
+                            error.ShowDialog();
+                        }
+                    }));
             }
         }
+        #endregion
 
-        private void CheckContribution_Click(object sender, RoutedEventArgs e)
+        private bool CheckNull()
         {
-            if (CheckContribution.IsChecked == true)
+            if (FirstName != null || LastName != null || Age != null || PersonalMoney != null)
             {
-                OnCapitalization.IsEnabled = true;
-                OffCapitalization.IsEnabled = true;
-                OnCapitalization.IsChecked = true;
-                TextContribution.IsEnabled = true;
+                return true;
             }
-
-            else
-            {
-                OnCapitalization.IsEnabled = false;
-                OffCapitalization.IsEnabled = false;
-                OnCapitalization.IsChecked = false;
-                OffCapitalization.IsChecked = false;
-                TextContribution.IsEnabled = false;
-            }
+            else return false;
         }
+
+        #region INPC
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+        #endregion
     }
 }

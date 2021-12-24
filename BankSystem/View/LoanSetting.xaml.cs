@@ -1,4 +1,5 @@
-﻿using LibraryModelBank;
+﻿using BankSystem.ViewModel;
+using LibraryModelBank;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,31 +22,41 @@ namespace BankSystem.View
     public partial class LoanSetting : Window
     {
         public User CreditUser { get; set; }
+        public string FullName { get; set; }
+        public string PersonalMoney { get; set; }
+        public string PercentageOfLoan { get; set; }
+        public string AddLoan { get; set; }
 
-        public LoanSetting(User user , int percentageOfLoan)
+        public LoanSetting(User user)
         {
             InitializeComponent();
             this.Focus();
+            this.DataContext = this;
             CreditUser = user;
-            FIO.Text += user.FullName;
-            Balance.Text += Convert.ToString(user.PersonalMoney);
-            Procent.Text += Convert.ToString(percentageOfLoan) + " %" ;
+            FullName = user.FullName;
+            PersonalMoney = Convert.ToString(user.PersonalMoney);
+            PercentageOfLoan = Convert.ToString(PercentageOfLoan);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private RelayCommand accept;
+        public RelayCommand Accept
         {
-            if (TextSum.Text != null)
+            get
             {
-                try
-                {
-                    CreditUser.Loan = Convert.ToDouble(TextSum.Text);
-                    DialogResult = true;
-                }
-                catch (FormatException)
-                {
-                    Error error = new Error();
-                    error.ShowDialog();
-                }
+                return accept ??
+                    (accept = new RelayCommand(obj =>
+                    {
+                        try
+                        {
+                            CreditUser.Loan += Convert.ToDouble(AddLoan);
+                            DialogResult = true;
+                        }
+                        catch (FormatException)
+                        {
+                            Error error = new Error();
+                            error.ShowDialog();
+                        }
+                    }));
             }
         }
     }

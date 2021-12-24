@@ -1,4 +1,5 @@
-﻿using LibraryModelBank;
+﻿using BankSystem.ViewModel;
+using LibraryModelBank;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,35 +22,44 @@ namespace BankSystem.View
     public partial class LoanRepayment : Window
     {
         public User UserChange { get; set; }
-        public double Loan { get; set; }
+        public string Loan { get; set; }
+        public string PaymentLoan { get; set; }
         public LoanRepayment(User user)
         {
             InitializeComponent();
             this.Focus();
+            this.DataContext = this;
             UserChange = user;
-            Loan = UserChange.Loan;
+            Loan = Convert.ToString(UserChange.Loan);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private RelayCommand accept;
+        public RelayCommand Accept
         {
-            try
+            get
             {
-                if (UserChange.Loan - Convert.ToDouble(TextSum.Text) >= 0)
-                {
-                    UserChange.Loan -= Convert.ToDouble(TextSum.Text);
-                    DialogResult = true;
-                }
-
-                else
-                {
-                    Error error = new Error();
-                    error.ShowDialog();
-                }
-            }
-            catch (FormatException)
-            {
-                Error error = new Error();
-                error.ShowDialog();
+                return accept ??
+                    (accept = new RelayCommand(obj =>
+                    {
+                        try
+                        {
+                            if (UserChange.Loan - Convert.ToDouble(PaymentLoan) >= 0)
+                            {
+                                UserChange.Loan -= Convert.ToDouble(PaymentLoan);
+                                DialogResult = true;
+                            }
+                            else
+                            {
+                                Error error = new Error();
+                                error.ShowDialog();
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            Error error = new Error();
+                            error.ShowDialog();
+                        }
+                    }));
             }
         }
     }

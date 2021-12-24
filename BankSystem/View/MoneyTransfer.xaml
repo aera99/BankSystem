@@ -11,7 +11,7 @@
             <ImageBrush ImageSource="Resources/back2.jpg"/>
         </Grid.Background>
         <Button Content="Отмена" HorizontalAlignment="Left" Margin="630,319,0,0" VerticalAlignment="Top" Width="75" IsCancel="True"/>
-        <Button Content="Принять" HorizontalAlignment="Left" Margin="549,319,0,0" VerticalAlignment="Top" Width="76" Click="Button_Click"/>
+        <Button Content="Принять" HorizontalAlignment="Left" Margin="549,319,0,0" VerticalAlignment="Top" Width="76" Command="{Binding Path=Accept}"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="549,291,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="156" Text="{Binding Sum , Mode=TwoWay}"/>
         <Grid Height="255" Margin="0,10,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
@@ -21,22 +21,22 @@
             <TextBlock HorizontalAlignment="Left" Margin="390,10,0,0" TextWrapping="Wrap" Text="Клиент которому поступают деньги:" VerticalAlignment="Top" Height="24" Width="315" TextAlignment="Center"/>
             <TextBlock HorizontalAlignment="Left" Margin="343,134,0,0" TextWrapping="Wrap" Text="🠖" VerticalAlignment="Top" Width="30" Height="36" TextAlignment="Center" FontSize="36"/>
             <DataGrid HorizontalAlignment="Left" Height="206" Margin="10,39,0,0" VerticalAlignment="Top" Width="315" SelectedValue="{Binding SelectedSender , Mode=TwoWay}"
-                      ItemsSource="{Binding Users}" Background="{x:Null}" AutoGenerateColumns="False">
+                      ItemsSource="{Binding AllUsers}" Background="{x:Null}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                     <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
                     <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"/>
                     <DataGridTextColumn Header="Возраст" Binding="{Binding Age}"/>
-                    <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                     <DataGridTextColumn Header="Счет" Binding="{Binding PersonalMoney}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <DataGrid HorizontalAlignment="Left" Height="206" Margin="390,39,0,0" VerticalAlignment="Top" Width="315" SelectedValue="{Binding SelectedRecipient , Mode=TwoWay}"
-                      ItemsSource="{Binding Users}" Background="{x:Null}" AutoGenerateColumns="False">
+                      ItemsSource="{Binding AllUsers}" Background="{x:Null}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                     <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}"/>
                     <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}"/>
                     <DataGridTextColumn Header="Возраст" Binding="{Binding Age}"/>
-                    <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
                     <DataGridTextColumn Header="Счет" Binding="{Binding PersonalMoney}"/>
                 </DataGrid.Columns>
             </DataGrid>

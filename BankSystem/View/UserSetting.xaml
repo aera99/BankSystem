@@ -11,26 +11,23 @@
             <ImageBrush ImageSource="Resources/back2.jpg"/>
         </Grid.Background>
         <Grid HorizontalAlignment="Left" Height="100" Margin="10,65,0,0" VerticalAlignment="Top" Width="321">
-            <CheckBox x:Name="CheckContribution" Content="Вклад" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="17" Width="120" ClickMode="Press" Click="CheckContribution_Click"/>
-            <RadioButton x:Name="OnCapitalization" Content="С капитализацией" HorizontalAlignment="Left" Margin="1,32,0,0" VerticalAlignment="Top" IsEnabled="False"/>
-            <RadioButton x:Name="OffCapitalization" Content="Без капитализации" HorizontalAlignment="Left" Margin="0,52,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+            <CheckBox Content="Вклад" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Height="17" Width="120" ClickMode="Press" IsChecked="{Binding Contribution}" Command="{Binding Path=ContributionCheck}"/>
             <TextBlock HorizontalAlignment="Left" Margin="154,9,0,0" TextWrapping="Wrap" Text="Введите сумму:" VerticalAlignment="Top" Height="17" Width="141" />
-            <TextBox x:Name="TextContribution" HorizontalAlignment="Left" Height="23" Margin="154,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118" IsEnabled="False"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="154,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="118" IsEnabled="{Binding Contribution}" Text="{Binding DepositMoney}"/>
+            <CheckBox Content="Капитализация" HorizontalAlignment="Left" Margin="0,38,0,0" VerticalAlignment="Top" Height="17" Width="120" ClickMode="Press" IsEnabled="{Binding Contribution}" IsChecked="{Binding Capitalization}"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="50" Margin="10,10,0,0" VerticalAlignment="Top" Width="572">
             <TextBlock Margin="0,1,0,0" TextWrapping="Wrap" Text="Введите имя" Height="18" Width="120" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox x:Name="TextName" Height="22" Margin="0,24,0,0" TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox Height="22" Margin="0,24,0,0" TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding FirstName}"/>
             <TextBlock Margin="153,1,0,0" TextWrapping="Wrap" Text="Введите фамилию" Height="18" Width="120" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox x:Name="TextLName" Height="22" Margin="153,24,0,0" TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox Height="22" Margin="153,24,0,0" TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding LastName}"/>
             <TextBlock Margin="304,1,0,0" TextWrapping="Wrap" Text="Введите возраст" Height="18" Width="120" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox x:Name="TextAge" Height="22" Margin="304,24,0,0" TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox Height="22" Margin="304,24,0,0" TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding Age}"/>
             <TextBlock Margin="452,1,0,0" TextWrapping="Wrap" Text="Введите личный счет" Height="18" Width="120" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <TextBox x:Name="TextMoney" Height="22" Margin="452,24,0,0" TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox Height="22" Margin="452,24,0,0" TextWrapping="Wrap" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding PersonalMoney}"/>
         </Grid>
         <Button Content="Отмена" HorizontalAlignment="Left" Margin="496,135,0,0" VerticalAlignment="Top" Width="86"
                 IsCancel="True"/>
-        <Button Content="Принять" HorizontalAlignment="Left" Margin="405,135,0,0" VerticalAlignment="Top" Width="86" 
-                Click="Button_Click"/>
-
+        <Button Content="Принять" HorizontalAlignment="Left" Margin="405,135,0,0" VerticalAlignment="Top" Width="86" Command="{Binding Path=Accept}"/>
     </Grid>
 </Window>

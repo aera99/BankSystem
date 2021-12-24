@@ -1,4 +1,5 @@
-﻿using LibraryModelBank;
+﻿using BankSystem.ViewModel;
+using LibraryModelBank;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,47 +24,50 @@ namespace BankSystem.View
     /// </summary>
     public partial class MoneyTransfer : Window
     {
-        public ObservableCollection<User> Users { get; set; } = new ObservableCollection<User>();
         public User SelectedSender { get; set; }
         public User SelectedRecipient { get; set; }
+        public ObservableCollection<User> AllUsers { get; set; }
         public string Sum { get; set; }
 
-        public MoneyTransfer(Department[] departments)
+        public MoneyTransfer(ObservableCollection<User> allUsers)
         {
             InitializeComponent();
             this.Focus();
             this.DataContext = this;
-
-            for (int i = 0; i < departments.Length; i++)
-            {
-                for (int j = 0; j < departments[i].Users.Count; j++)
-                {
-                    Users.Add(departments[i].Users[j]);
-                }
-            }
+            AllUsers = allUsers;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        #region команды
+        private RelayCommand accept;
+        public RelayCommand Accept
         {
-            try
+            get
             {
-                if ((SelectedSender.PersonalMoney - Convert.ToDouble(Sum)) >= 0)
-                {
-                    SelectedSender.PersonalMoney -= Convert.ToDouble(Sum);
-                    SelectedRecipient.PersonalMoney += Convert.ToDouble(Sum);
-                }
-
-                else
-                {
-                    Error error = new Error();
-                    error.ShowDialog();
-                }
-            }
-            catch (FormatException)
-            {
-                Error error = new Error();
-                error.ShowDialog();
+                return accept ??
+                    (accept = new RelayCommand(obj =>
+                    {
+                        try
+                        {
+                            if (SelectedSender.PersonalMoney - Convert.ToDouble(Sum) >= 0)
+                            {
+                                SelectedSender.PersonalMoney -= Convert.ToDouble(Sum);
+                                SelectedRecipient.PersonalMoney += Convert.ToDouble(Sum);
+                                DialogResult = true;
+                            }
+                            else
+                            {
+                                Error error = new Error();
+                                error.ShowDialog();
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            Error error = new Error();
+                            error.ShowDialog();
+                        }
+                    }));
             }
         }
+        #endregion
     }
 }
