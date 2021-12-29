@@ -1,4 +1,5 @@
-﻿using LibraryModelBank;
+﻿using BankSystem.ViewModel;
+using LibraryModelBank;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,17 +10,19 @@ using System.Threading.Tasks;
 
 namespace BankSystem.Model
 {
-    public class UserINPC : User , INotifyPropertyChanged
+    public class UserINPC : Bindable
     {
         private string _firstName;
-        private string _lastName;
+        private string _LastName;
         private int _age;
         private double _personalMoney;
         private double _depositMoney;
         private double _loan;
         private int _iD;
         private bool _capitalization;
-        public new string FirstName
+        private int _percentageOfCapitalization;
+        private int _percentageOfLoan;
+        public string FirstName
         {
             get { return _firstName; }
             set
@@ -28,16 +31,23 @@ namespace BankSystem.Model
                 OnPropertyChanged("FirstName");
             }
         }
-        public new string LastName
+        public string LastName
         {
-            get { return _lastName; }
+            get { return _LastName; }
             set
             {
-                _lastName = value;
+                _LastName = value;
                 OnPropertyChanged("LastName");
             }
         }
-        public new int Age
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
+        public int Age
         {
             get { return _age; }
             set
@@ -46,7 +56,7 @@ namespace BankSystem.Model
                 OnPropertyChanged("Age");
             }
         }
-        public new double PersonalMoney
+        public double PersonalMoney
         {
             get { return _personalMoney; }
             set
@@ -55,7 +65,7 @@ namespace BankSystem.Model
                 OnPropertyChanged("PersonalMoney");
             }
         }
-        public new double DepositMoney
+        public double DepositMoney
         {
             get { return _depositMoney; }
             set
@@ -64,7 +74,7 @@ namespace BankSystem.Model
                 OnPropertyChanged("DepositMoney");
             }
         }
-        public new double Loan
+        public double Loan
         {
             get { return _loan; }
             set
@@ -73,7 +83,7 @@ namespace BankSystem.Model
                 OnPropertyChanged("Loan");
             }
         }
-        public new int ID
+        public int ID
         {
             get { return _iD; }
             set
@@ -82,46 +92,110 @@ namespace BankSystem.Model
                 OnPropertyChanged("ID");
             }
         }
-        public new bool Capitalization
+        static int IDCounter;
+        private bool _contribution;
+        public bool Contribution
+        {
+            get { return _contribution; }
+            set
+            {
+                _contribution = value;
+                if (_contribution == true)
+                {
+                    StartDayContribution = DateTime.Now;
+                }
+                OnPropertyChanged("Contribution");
+            }
+        }
+        public bool Capitalization
         {
             get { return _capitalization; }
             set
             {
                 _capitalization = value;
-                OnPropertyChanged("FirstName");
+                OnPropertyChanged("Capitalization");
+            }
+        }
+        public DateTime StartDayContribution { get; set; }
+        public int PercentageOfCapitalization
+        {
+            get { return _percentageOfCapitalization; }
+            set
+            {
+                _percentageOfCapitalization = value;
+                OnPropertyChanged("PercentageOfCapitalization");
+            }
+        }
+        public int PercentageOfLoan
+        {
+            get { return _percentageOfLoan; }
+            set
+            {
+                _percentageOfLoan = value;
+                OnPropertyChanged("PercentageOfLoan");
             }
         }
 
-        //public UserINPC(string firstName, string lastName, int age, double personalMoney, double depositMoney, bool contribution, bool capitalization)
-        //{
-        //    FirstName = firstName;
-        //    LastName = lastName;
-        //    Age = age;
-        //    PersonalMoney = personalMoney;
-        //    DepositMoney = depositMoney;
-        //    ID = ++IDCounter;
-        //    Contribution = contribution;
-        //    Capitalization = capitalization;
-        //    PercentageOfCapitalization = 13;
-        //    PercentageOfLoan = 4;
-        //}
-
-        //public UserINPC()
-        //{
-        //    FirstName = FNames[random.Next(0, FNames.Length)];
-        //    LastName = LNames[random.Next(0, LNames.Length)];
-        //    Age = random.Next(18, 50);
-        //    PersonalMoney = random.Next(20000, 2352359);
-        //    ID = ++IDCounter;
-        //    PercentageOfCapitalization = random.Next(10, 15);
-        //    PercentageOfLoan = random.Next(3, 6);
-        //}
-        #region INPC
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        #region Данные для теста
+        string[] FNames = new string[]
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+                "Владислав","Вячеслав", "Юрий","Роман",
+                "Иван","Павел","Виталий","Александр",
+                "Никита","Алексей","Дмитрий","Василий"
+        };
+
+        string[] LNames = new string[]
+        {
+                "Иванов","Петров", "Петечкин","Васечкин",
+                "Мышкин","Клавиатуркин","Мониторкин","Микрофонкин",
+                "Кнопочкин","Экранкин","Програмкин","Консолькин"
+        };
+        Random random = new Random();
+        #endregion
+
+        #region конструкторы
+        public UserINPC(string firstName, string lastName, int age, double personalMoney, double depositMoney, bool contribution, bool capitalization)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Age = age;
+            PersonalMoney = personalMoney;
+            DepositMoney = depositMoney;
+            ID = ++IDCounter;
+            Contribution = contribution;
+            Capitalization = capitalization;
+            PercentageOfCapitalization = 13;
+            PercentageOfLoan = 4;
+        }
+
+        //заполнение случайными данными для теста
+        public UserINPC()
+        {
+            FirstName = FNames[random.Next(0, FNames.Length)];
+            LastName = LNames[random.Next(0, LNames.Length)];
+            Age = random.Next(18, 50);
+            PersonalMoney = random.Next(20000, 2352359);
+            ID = ++IDCounter;
+            PercentageOfCapitalization = random.Next(10, 15);
+            PercentageOfLoan = random.Next(3, 6);
         }
         #endregion
+
+        public void ChangeAllInfo(UserINPC user)
+        {
+            FirstName = user.FirstName;
+            LastName = user.LastName;
+            Age = user.Age;
+            PersonalMoney = user.PersonalMoney;
+            DepositMoney = user.DepositMoney;
+            Loan = user.Loan;
+            ID = user.ID;
+            Contribution = user.Contribution;
+            Capitalization = user.Capitalization;
+            StartDayContribution = user.StartDayContribution;
+            PercentageOfCapitalization = user.PercentageOfCapitalization;
+            PercentageOfLoan = user.PercentageOfLoan;
+            //TODO узнать как можно заменить класс UserINPC на данный класс.
+        }
     }
 }

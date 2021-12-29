@@ -1,4 +1,5 @@
-﻿using BankSystem.ViewModel;
+﻿using BankSystem.Model;
+using BankSystem.ViewModel;
 using LibraryModelBank;
 using System;
 using System.Collections.Generic;
@@ -24,12 +25,12 @@ namespace BankSystem.View
     /// </summary>
     public partial class MoneyTransfer : Window
     {
-        public User SelectedSender { get; set; }
-        public User SelectedRecipient { get; set; }
-        public ObservableCollection<User> AllUsers { get; set; }
+        public UserINPC SelectedSender { get; set; }
+        public UserINPC SelectedRecipient { get; set; }
+        public ObservableCollection<UserINPC> AllUsers { get; set; }
         public string Sum { get; set; }
 
-        public MoneyTransfer(ObservableCollection<User> allUsers)
+        public MoneyTransfer(ObservableCollection<UserINPC> allUsers)
         {
             InitializeComponent();
             this.Focus();

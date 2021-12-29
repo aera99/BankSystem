@@ -6,17 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using BankSystem.Model;
 using BankSystem.View;
-using LibraryModelBank;
 
 
 namespace BankSystem.ViewModel
 {
-    public class ViewModelClass : VMBase
+    public class ViewModelClass : Bindable
     {
         public DepartmentINPC BankDepartment { get; set; }
 
-        private User selectedUser;
-        public User SelectedUser
+        private UserINPC selectedUser;
+        public UserINPC SelectedUser
         {
             get { return selectedUser; }
             set
@@ -25,7 +24,7 @@ namespace BankSystem.ViewModel
                 OnPropertyChanged("SelectedUser");
             }
         }
-        public ObservableCollection<User> AllUsers
+        public ObservableCollection<UserINPC> AllUsers
         {
             get { return BankDepartment.Users; }
             set
@@ -49,7 +48,7 @@ namespace BankSystem.ViewModel
                 return _testAddUser ??
                     (_testAddUser = new RelayCommand(obj =>
                     {
-                        AllUsers.Add(new User());
+                        AllUsers.Add(new UserINPC());
                     }));
             }
         }

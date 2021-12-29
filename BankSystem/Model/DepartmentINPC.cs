@@ -13,8 +13,8 @@ namespace BankSystem.Model
 {
     public class DepartmentINPC : Department , INotifyPropertyChanged
     {
-        private ObservableCollection<User> _users;
-        public new ObservableCollection<User> Users
+        private ObservableCollection<UserINPC> _users;
+        public new ObservableCollection<UserINPC> Users
         {
             get { return _users; }
             set
@@ -26,7 +26,7 @@ namespace BankSystem.Model
 
         public DepartmentINPC()
         {
-            Users = new ObservableCollection<User>();
+            Users = new ObservableCollection<UserINPC>();
         }
 
         #region INPC

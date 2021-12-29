@@ -1,4 +1,5 @@
-﻿using BankSystem.ViewModel;
+﻿using BankSystem.Model;
+using BankSystem.ViewModel;
 using LibraryModelBank;
 using System;
 using System.Collections.Generic;
@@ -21,13 +22,13 @@ namespace BankSystem.View
     /// </summary>
     public partial class LoanSetting : Window
     {
-        public User CreditUser { get; set; }
+        public UserINPC CreditUser { get; set; }
         public string FullName { get; set; }
         public string PersonalMoney { get; set; }
         public string PercentageOfLoan { get; set; }
         public string AddLoan { get; set; }
 
-        public LoanSetting(User user)
+        public LoanSetting(UserINPC user)
         {
             InitializeComponent();
             this.Focus();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BankSystem.ViewModel
 {
-    public class VMBase : INotifyPropertyChanged
+    public class Bindable : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

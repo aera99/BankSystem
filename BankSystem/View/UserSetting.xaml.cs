@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using BankSystem.Model;
 
 namespace BankSystem.View
 {
@@ -23,7 +24,7 @@ namespace BankSystem.View
     /// </summary>
     public partial class UserSetting : Window , INotifyPropertyChanged
     {
-        public User User { get; set; }
+        public UserINPC User { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Age { get; set; }
@@ -48,7 +49,7 @@ namespace BankSystem.View
             this.Focus();
             this.DataContext = this;
         }
-        public UserSetting(User user)
+        public UserSetting(UserINPC user)
         {
             InitializeComponent();
             this.Focus();
@@ -77,7 +78,7 @@ namespace BankSystem.View
                         {
                             if (CheckNull() || User == null)
                             {
-                                User = new User(FirstName, LastName, Convert.ToInt32(Age), Convert.ToDouble(PersonalMoney), Convert.ToDouble(DepositMoney), Contribution, Capitalization);
+                                User = new UserINPC(FirstName, LastName, Convert.ToInt32(Age), Convert.ToDouble(PersonalMoney), Convert.ToDouble(DepositMoney), Contribution, Capitalization);
                             }
                             else if (CheckNull() || User != null)
                             {

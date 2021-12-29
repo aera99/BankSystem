@@ -96,7 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModel\VMBase.cs" />
+    <Compile Include="ViewModel\Bindable.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\ViewModelClass.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
