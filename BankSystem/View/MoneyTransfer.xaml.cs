@@ -28,7 +28,7 @@ namespace BankSystem.View
         public UserINPC SelectedSender { get; set; }
         public UserINPC SelectedRecipient { get; set; }
         public ObservableCollection<UserINPC> AllUsers { get; set; }
-        public string Sum { get; set; }
+        public double Sum { get; set; }
 
         public MoneyTransfer(ObservableCollection<UserINPC> allUsers)
         {
@@ -49,10 +49,10 @@ namespace BankSystem.View
                     {
                         try
                         {
-                            if (SelectedSender.PersonalMoney - Convert.ToDouble(Sum) >= 0)
+                            if (SelectedSender.PersonalMoney - Sum >= 0)
                             {
-                                SelectedSender.PersonalMoney -= Convert.ToDouble(Sum);
-                                SelectedRecipient.PersonalMoney += Convert.ToDouble(Sum);
+                                SelectedSender.PersonalMoney -= Sum;
+                                SelectedRecipient.PersonalMoney += Sum;
                                 DialogResult = true;
                             }
                             else

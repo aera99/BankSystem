@@ -1,0 +1,25 @@
+﻿<Window x:Class="BankSystem.View.ActivityLogView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankSystem.View"
+        mc:Ignorable="d"
+        Title="ActivityLogView" Height="352.889" Width="550.742">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Resources/back2.jpg"/>
+        </Grid.Background>
+        <DataGrid HorizontalAlignment="Left" Height="271" Margin="10,10,0,0" VerticalAlignment="Top" Width="523" ItemsSource="{Binding ActivityLogs}" Background="{x:Null}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Время операции" Binding="{Binding TimeOperation}"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                <DataGridTextColumn Header="Фамилия и имя" Binding="{Binding FullNameUser}"/>
+                <DataGridTextColumn Header="Тип операции" Binding="{Binding TypeOperations}"/>
+                <DataGridTextColumn Header="Сумма операции" Binding="{Binding Sum}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Принять" HorizontalAlignment="Left" Margin="432,286,0,0" VerticalAlignment="Top" Width="101" Height="26" IsCancel="True"/>
+
+    </Grid>
+</Window>

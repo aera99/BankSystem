@@ -44,6 +44,8 @@
                         VerticalAlignment="Top" Width="107" Height="25" Command="{Binding Path=EditLoanRepayment}"/>
                 <Button Content="Перевод денег" HorizontalAlignment="Left" Margin="203,97,0,0" 
                         VerticalAlignment="Top" Width="107" Height="25" Command="{Binding Path=Trasfer}"/>
+                <Button Content="Журнал действий" HorizontalAlignment="Left" Margin="10,187,0,0" 
+                    VerticalAlignment="Top" Width="107" Height="25" Command="{Binding Path=ShowActivityLog}"/>
                 <Button Content="TestAddUser" HorizontalAlignment="Left" Margin="10,339,0,0" 
                 VerticalAlignment="Top" Width="113" Command="{Binding TestAddUser}" Height="30"/>
                 <Button Content="TestAddMonth" HorizontalAlignment="Left" Margin="201,339,0,0" 

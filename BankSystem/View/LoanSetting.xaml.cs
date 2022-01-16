@@ -24,9 +24,9 @@ namespace BankSystem.View
     {
         public UserINPC CreditUser { get; set; }
         public string FullName { get; set; }
-        public string PersonalMoney { get; set; }
-        public string PercentageOfLoan { get; set; }
-        public string AddLoan { get; set; }
+        public double PersonalMoney { get; set; }
+        public int PercentageOfLoan { get; set; }
+        public double AddLoan { get; set; }
 
         public LoanSetting(UserINPC user)
         {
@@ -35,8 +35,8 @@ namespace BankSystem.View
             this.DataContext = this;
             CreditUser = user;
             FullName = user.FullName;
-            PersonalMoney = Convert.ToString(user.PersonalMoney);
-            PercentageOfLoan = Convert.ToString(PercentageOfLoan);
+            PersonalMoney = user.PersonalMoney;
+            PercentageOfLoan = user.PercentageOfLoan;
         }
 
         private RelayCommand accept;
@@ -49,7 +49,7 @@ namespace BankSystem.View
                     {
                         try
                         {
-                            CreditUser.Loan += Convert.ToDouble(AddLoan);
+                            CreditUser.Loan += AddLoan;
                             DialogResult = true;
                         }
                         catch (FormatException)

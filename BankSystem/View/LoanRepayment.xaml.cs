@@ -23,15 +23,15 @@ namespace BankSystem.View
     public partial class LoanRepayment : Window
     {
         public UserINPC UserChange { get; set; }
-        public string Loan { get; set; }
-        public string PaymentLoan { get; set; }
+        public double Loan { get; set; }
+        public double PaymentLoan { get; set; }
         public LoanRepayment(UserINPC user)
         {
             InitializeComponent();
             this.Focus();
             this.DataContext = this;
             UserChange = user;
-            Loan = Convert.ToString(UserChange.Loan);
+            Loan = UserChange.Loan;
         }
 
         private RelayCommand accept;
@@ -44,9 +44,9 @@ namespace BankSystem.View
                     {
                         try
                         {
-                            if (UserChange.Loan - Convert.ToDouble(PaymentLoan) >= 0)
+                            if (UserChange.Loan - PaymentLoan >= 0)
                             {
-                                UserChange.Loan -= Convert.ToDouble(PaymentLoan);
+                                UserChange.Loan -= PaymentLoan;
                                 DialogResult = true;
                             }
                             else

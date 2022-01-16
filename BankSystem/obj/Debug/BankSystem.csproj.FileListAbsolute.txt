@@ -26,3 +26,5 @@ C:\Users\User\OneDrive\Рабочий стол\дз\modul13\BankSystem\obj\Debug
 C:\Users\User\OneDrive\Рабочий стол\дз\modul13\BankSystem\bin\Debug\LibraryModelBank.dll
 C:\Users\User\OneDrive\Рабочий стол\дз\modul13\BankSystem\bin\Debug\LibraryModelBank.pdb
 C:\Users\User\OneDrive\Рабочий стол\дз\modul13\BankSystem\obj\Debug\BankSystem.csproj.CopyComplete
+C:\Users\User\OneDrive\Рабочий стол\дз\modul13\BankSystem\obj\Debug\View\ActivityLogView.g.cs
+C:\Users\User\OneDrive\Рабочий стол\дз\modul13\BankSystem\obj\Debug\View\ActivityLogView.baml

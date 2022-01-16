@@ -10,8 +10,10 @@ using BankSystem.View;
 
 namespace BankSystem.ViewModel
 {
+    public delegate void ActivityUsers(string typeOperation, double sum);
     public class ViewModelClass : Bindable
     {
+        private event ActivityUsers EventActivity;
         public DepartmentINPC BankDepartment { get; set; }
 
         private UserINPC selectedUser;
@@ -33,11 +35,21 @@ namespace BankSystem.ViewModel
                 OnPropertyChanged("AllUsers");
             }
         }
+        public List<ActivityLog> ActivityLogs { get; set; }
 
         public ViewModelClass()
         {
             BankDepartment = new DepartmentINPC();
+            ActivityLogs = new List<ActivityLog>();
+            EventActivity += AddActivity;
         }
+
+        #region Методы
+        private void AddActivity(string typeOperation, double sum)
+        {
+            ActivityLogs.Add(new ActivityLog(SelectedUser, typeOperation , sum));
+        }
+        #endregion
 
         #region Команды
         private RelayCommand _testAddUser;
@@ -45,11 +57,7 @@ namespace BankSystem.ViewModel
         {
             get
             {
-                return _testAddUser ??
-                    (_testAddUser = new RelayCommand(obj =>
-                    {
-                        AllUsers.Add(new UserINPC());
-                    }));
+                return _testAddUser ?? (_testAddUser = new RelayCommand(obj => AllUsers.Add(new UserINPC())));
             }
         }
 
@@ -58,11 +66,7 @@ namespace BankSystem.ViewModel
         {
             get
             {
-                return testAddMonth ??
-                    (testAddMonth = new RelayCommand(obj =>
-                    {
-                        BankDepartment.Time.AddMonths(1);
-                    }));
+                return testAddMonth ?? (testAddMonth = new RelayCommand(obj => BankDepartment.Time.AddMonths(1)));
             }
         }
 
@@ -136,7 +140,7 @@ namespace BankSystem.ViewModel
                         MoneyTransfer mt = new MoneyTransfer(AllUsers);
                         if (mt.ShowDialog() == true)
                         {
-
+                            EventActivity("перевод средств" , mt.Sum);
                         }
                     }));
             }
@@ -155,6 +159,7 @@ namespace BankSystem.ViewModel
                             LoanSetting loanSetting = new LoanSetting(SelectedUser);
                             if (loanSetting.ShowDialog() == true)
                             {
+                                EventActivity("получение кредита", loanSetting.AddLoan);
                             }
                         }
                     }));
@@ -174,8 +179,23 @@ namespace BankSystem.ViewModel
                             LoanRepayment loanRepayment = new LoanRepayment(SelectedUser);
                             if (loanRepayment.ShowDialog() == true)
                             {
+                                EventActivity("погашение кредита", loanRepayment.PaymentLoan);
                             }
                         }
+                    }));
+            }
+        }
+
+        private RelayCommand showActivityLog;
+        public RelayCommand ShowActivityLog
+        {
+            get
+            {
+                return showActivityLog ??
+                    (showActivityLog = new RelayCommand(obj =>
+                    {
+                        ActivityLogView activityLogView = new ActivityLogView(ActivityLogs);
+                        activityLogView.ShowDialog();
                     }));
             }
         }

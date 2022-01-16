@@ -59,8 +59,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\ActivityLog.cs" />
     <Compile Include="Model\DepartmentINPC.cs" />
     <Compile Include="Model\UserINPC.cs" />
+    <Compile Include="View\ActivityLogView.xaml.cs">
+      <DependentUpon>ActivityLogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Error.xaml.cs">
       <DependentUpon>Error.xaml</DependentUpon>
     </Compile>
@@ -76,6 +80,10 @@
     <Compile Include="View\UserSetting.xaml.cs">
       <DependentUpon>UserSetting.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\ActivityLogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Error.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
