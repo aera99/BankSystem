@@ -197,5 +197,17 @@ namespace BankSystem.Model
             PercentageOfLoan = user.PercentageOfLoan;
             //TODO узнать как можно заменить класс UserINPC на данный класс.
         }
+
+        public void AddLoan(double loan)
+        {
+            Loan += loan;
+            PersonalMoney += loan;
+        }
+
+        public void RepayLoan(double loan)
+        {
+            Loan -= loan;
+            PersonalMoney -= loan;
+        }
     }
 }

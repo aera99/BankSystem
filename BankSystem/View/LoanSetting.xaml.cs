@@ -39,6 +39,12 @@ namespace BankSystem.View
             PercentageOfLoan = user.PercentageOfLoan;
         }
 
+        private void ShowError()
+        {
+            Error error = new Error();
+            error.ShowDialog();
+        }
+
         private RelayCommand accept;
         public RelayCommand Accept
         {
@@ -49,13 +55,17 @@ namespace BankSystem.View
                     {
                         try
                         {
-                            CreditUser.Loan += AddLoan;
-                            DialogResult = true;
+                            if (AddLoan > 0)
+                            {
+                                CreditUser.AddLoan(AddLoan);
+                                DialogResult = true;
+                            }
+
+                            else ShowError();
                         }
                         catch (FormatException)
                         {
-                            Error error = new Error();
-                            error.ShowDialog();
+                            ShowError();
                         }
                     }));
             }

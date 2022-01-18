@@ -94,8 +94,7 @@ namespace BankSystem.View
                         }
                         catch (FormatException)
                         {
-                            Error error = new Error();
-                            error.ShowDialog();
+                            ShowError();
                         }
                     }));
             }
@@ -109,6 +108,12 @@ namespace BankSystem.View
                 return true;
             }
             else return false;
+        }
+
+        private void ShowError()
+        {
+            Error error = new Error();
+            error.ShowDialog();
         }
 
         #region INPC

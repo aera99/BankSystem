@@ -34,6 +34,12 @@ namespace BankSystem.View
             Loan = UserChange.Loan;
         }
 
+        private void ShowError()
+        {
+            Error error = new Error();
+            error.ShowDialog();
+        }
+
         private RelayCommand accept;
         public RelayCommand Accept
         {
@@ -44,21 +50,17 @@ namespace BankSystem.View
                     {
                         try
                         {
-                            if (UserChange.Loan - PaymentLoan >= 0)
+                            if (UserChange.Loan - PaymentLoan >= 0 && PaymentLoan > 0 && UserChange.PersonalMoney >= PaymentLoan)
                             {
-                                UserChange.Loan -= PaymentLoan;
+                                UserChange.RepayLoan(PaymentLoan);
                                 DialogResult = true;
                             }
-                            else
-                            {
-                                Error error = new Error();
-                                error.ShowDialog();
-                            }
+
+                            else ShowError();
                         }
                         catch (FormatException)
                         {
-                            Error error = new Error();
-                            error.ShowDialog();
+                            ShowError();
                         }
                     }));
             }

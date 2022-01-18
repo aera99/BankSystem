@@ -38,6 +38,12 @@ namespace BankSystem.View
             AllUsers = allUsers;
         }
 
+        private void ShowError()
+        {
+            Error error = new Error();
+            error.ShowDialog();
+        }
+
         #region команды
         private RelayCommand accept;
         public RelayCommand Accept
@@ -55,16 +61,12 @@ namespace BankSystem.View
                                 SelectedRecipient.PersonalMoney += Sum;
                                 DialogResult = true;
                             }
-                            else
-                            {
-                                Error error = new Error();
-                                error.ShowDialog();
-                            }
+
+                            else ShowError();
                         }
                         catch (FormatException)
                         {
-                            Error error = new Error();
-                            error.ShowDialog();
+                            ShowError();
                         }
                     }));
             }
