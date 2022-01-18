@@ -27,9 +27,9 @@ namespace BankSystem.View
         public UserINPC User { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Age { get; set; }
-        public string PersonalMoney { get; set; }
-        public string DepositMoney { get; set; }
+        public int Age { get; set; }
+        public double PersonalMoney { get; set; }
+        public double DepositMoney { get; set; }
 
         private bool contribution;
         public bool Contribution
@@ -58,9 +58,9 @@ namespace BankSystem.View
 
             FirstName = user.FirstName;
             LastName = user.LastName;
-            Age = Convert.ToString(user.Age);
-            PersonalMoney = Convert.ToString(user.PersonalMoney);
-            DepositMoney = Convert.ToString(user.DepositMoney);
+            Age = user.Age;
+            PersonalMoney = user.PersonalMoney;
+            DepositMoney = user.DepositMoney;
             Contribution = user.Contribution;
             Capitalization = user.Capitalization;
         }
@@ -76,21 +76,24 @@ namespace BankSystem.View
                     {
                         try
                         {
-                            if (CheckNull() || User == null)
+                            if (CheckNull() && User == null)
                             {
-                                User = new UserINPC(FirstName, LastName, Convert.ToInt32(Age), Convert.ToDouble(PersonalMoney), Convert.ToDouble(DepositMoney), Contribution, Capitalization);
+                                User = new UserINPC(FirstName, LastName, Age, PersonalMoney, DepositMoney, Contribution, Capitalization);
+                                DialogResult = true;
                             }
-                            else if (CheckNull() || User != null)
+                            else if (CheckNull() && User != null)
                             {
                                 User.FirstName = FirstName;
                                 User.LastName = LastName;
-                                User.Age = Convert.ToInt32(Age);
-                                User.PersonalMoney = Convert.ToDouble(PersonalMoney);
-                                User.DepositMoney = Convert.ToDouble(DepositMoney);
+                                User.Age = Age;
+                                User.PersonalMoney = PersonalMoney;
+                                User.DepositMoney = DepositMoney;
                                 User.Contribution = Contribution;
                                 User.Capitalization = Capitalization;
+
+                                DialogResult = true;
                             }
-                            DialogResult = true;
+                            else ShowError();
                         }
                         catch (FormatException)
                         {
@@ -103,7 +106,7 @@ namespace BankSystem.View
 
         private bool CheckNull()
         {
-            if (FirstName != null || LastName != null || Age != null || PersonalMoney != null)
+            if (FirstName != null && FirstName != "" && LastName != null && LastName != "")
             {
                 return true;
             }
